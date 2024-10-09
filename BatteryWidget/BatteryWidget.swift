@@ -255,7 +255,7 @@ struct BatteryWidgetEntryView: View {
             }
             HStack{
                 Spacer()
-                if maxPerc > 80 {
+                if maxPerc >= 80 {
                     if entry.batteryInfo.charging {
                         Text("Health: Good")
                             .font(.title)
@@ -277,7 +277,7 @@ struct BatteryWidgetEntryView: View {
                             .shadow(radius: 10)
                     }
                 }
-                else if maxPerc <= 80 && maxPerc > 60 {
+                else if maxPerc < 80 && maxPerc >= 60 {
                     Text("Health: To check")
                         .font(.title)
                         .padding(.vertical, 5)
@@ -422,9 +422,9 @@ struct ArcGaugeView: View {
     private var gaugeColor: Color {
         let percentage = progress * 100
         switch percentage {
-        case 0..<50:
+        case 0..<60:
             return .red
-        case 50..<75:
+        case 60..<80:
             return .yellow
         default:
             return .cyan
